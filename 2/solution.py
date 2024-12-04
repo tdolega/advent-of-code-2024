@@ -1,4 +1,4 @@
-def is_safe(report):
+def is_safe(report: list[int]) -> bool:
     diffs = [level1 - level2 for level1, level2 in zip(report, report[1:])]
     all_increasing = all(diff > 0 for diff in diffs)
     all_decreasing = all(diff < 0 for diff in diffs)
@@ -8,7 +8,7 @@ def is_safe(report):
     return is_gradual
 
 
-def is_safe_tolerant(report):
+def is_safe_tolerant(report: list[int]) -> bool:
     if is_safe(report):
         return True
     for i in range(len(report)):
@@ -18,11 +18,11 @@ def is_safe_tolerant(report):
     return False
 
 
-def solve_1(reports):
+def solve_1(reports: list[list[int]]) -> int:
     return sum(map(is_safe, reports))
 
 
-def solve_2(reports):
+def solve_2(reports: list[list[int]]) -> int:
     return sum(map(is_safe_tolerant, reports))
 
 
