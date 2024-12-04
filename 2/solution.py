@@ -1,14 +1,12 @@
-def is_safe(report: list[int]) -> bool:
+def is_safe(report: list[int]):
     diffs = [level1 - level2 for level1, level2 in zip(report, report[1:])]
     all_increasing = all(diff > 0 for diff in diffs)
     all_decreasing = all(diff < 0 for diff in diffs)
-    if not all_increasing and not all_decreasing:
-        return False
     is_gradual = all(1 <= abs(diff) <= 3 for diff in diffs)
-    return is_gradual
+    return (all_increasing or all_decreasing) and is_gradual
 
 
-def is_safe_tolerant(report: list[int]) -> bool:
+def is_safe_tolerant(report: list[int]):
     if is_safe(report):
         return True
     for i in range(len(report)):
@@ -18,16 +16,16 @@ def is_safe_tolerant(report: list[int]) -> bool:
     return False
 
 
-def solve_1(reports: list[list[int]]) -> int:
+def solve_1(reports: list[list[int]]):
     return sum(map(is_safe, reports))
 
 
-def solve_2(reports: list[list[int]]) -> int:
+def solve_2(reports: list[list[int]]):
     return sum(map(is_safe_tolerant, reports))
 
 
-with open("input1.txt") as f:
+with open("input.txt") as f:
     reports = [list(map(int, line.split())) for line in f]
 
-print(f"solution 1: {solve_1(reports)}")  # 624
-print(f"solution 2: {solve_2(reports)}")  # 658
+print(f"part 1: {solve_1(reports)}")  # 624
+print(f"part 2: {solve_2(reports)}")  # 658

@@ -1,12 +1,12 @@
 import re
 
 
-def solve1(memory_region: str) -> int:
+def solve1(memory_region: str):
     hits = re.findall(r"mul\((\d{1,3}),(\d{1,3})\)", memory_region)
     return sum(int(x) * int(y) for x, y in hits)
 
 
-def solve2(memory: str) -> int:
+def solve2(memory: str):
     ENABLE_PATTERN = "do()"
     DISABLE_PATTERN = "don't()"
     solution = 0
@@ -21,8 +21,8 @@ def solve2(memory: str) -> int:
     return solution
 
 
-with open("input1.txt") as f:
+with open("input.txt") as f:
     memory = f.read()
 
-print(f"solution 1: {solve1(memory)}")  # 173529487
-print(f"solution 2: {solve2(memory)}")  # 99532691
+print(f"part 1: {solve1(memory)}")  # 173529487
+print(f"part 2: {solve2(memory)}")  # 99532691
