@@ -16,16 +16,17 @@ def is_safe_tolerant(report: list[int]):
     return False
 
 
-def solve_1(reports: list[list[int]]):
-    return sum(map(is_safe, reports))
+def solve(filename: str):
+    print(filename)
+    with open(filename) as f:
+        reports = [list(map(int, line.split())) for line in f]
+
+    answer_1 = sum(map(is_safe, reports))
+    answer_2 = sum(map(is_safe_tolerant, reports))
+
+    print(f" part 1: {answer_1}")
+    print(f" part 2: {answer_2}")
 
 
-def solve_2(reports: list[list[int]]):
-    return sum(map(is_safe_tolerant, reports))
-
-
-with open("input.txt") as f:
-    reports = [list(map(int, line.split())) for line in f]
-
-print(f"part 1: {solve_1(reports)}")  # 624
-print(f"part 2: {solve_2(reports)}")  # 658
+solve("example.txt")  # 2, 4
+solve("input.txt")  # 624, 658

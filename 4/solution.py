@@ -51,8 +51,17 @@ def find_x(lines: list[str], needle: str):
     return all_f_diag_hits & all_b_diag_hits
 
 
-with open("input.txt") as f:
-    lines = f.readlines()
+def solve(filename: str):
+    print(filename)
+    with open(filename) as f:
+        lines = f.readlines()
 
-print(f"part 1:", len(find_bidir(lines, "XMAS")))  # 2414
-print(f"part 2:", len(find_x(lines, "MAS")))  # 1871
+    answer_1 = len(find_bidir(lines, "XMAS"))
+    answer_2 = len(find_x(lines, "MAS"))
+
+    print(f" part 1: {answer_1}")
+    print(f" part 2: {answer_2}")
+
+
+solve("example.txt")  # 18, 9
+solve("input.txt")  # 2414, 1871

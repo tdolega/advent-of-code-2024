@@ -21,8 +21,14 @@ def solve2(memory: str):
     return solution
 
 
-with open("input.txt") as f:
-    memory = f.read()
+def solve(filename: str):
+    print(filename)
+    with open(filename) as f:
+        memory = f.read()
 
-print(f"part 1: {solve1(memory)}")  # 173529487
-print(f"part 2: {solve2(memory)}")  # 99532691
+    print(f" part 1: {solve1(memory)}")
+    print(f" part 2: {solve2(memory)}")
+
+
+solve("example.txt")  # 161, 48
+solve("input.txt")  # 173529487, 99532691
