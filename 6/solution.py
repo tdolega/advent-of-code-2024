@@ -34,7 +34,7 @@ def step(obstructions_map: list[str], x: int, y: int, direction: int):
         next_x = x + x_offset
         next_y = y + y_offset
         if next_x < 0 or next_x >= len(obstructions_map[0]) or next_y < 0 or next_y >= len(obstructions_map):
-            return False
+            return False  # out of bounds
         if obstructions_map[next_y][next_x] != WALL:
             return next_x, next_y, next_direction
     raise ValueError("No valid step found")
@@ -46,21 +46,20 @@ def solve(filename: str):
         obstructions_map = list(map(list, f.read().splitlines()))
 
     w, h = len(obstructions_map[0]), len(obstructions_map)
-    tracking_map = create_tracking_map(w, h)
+    original_tracking_map = create_tracking_map(w, h)
     first_step = get_start_pos(obstructions_map)
     next_step = first_step
     while next_step:
         x, y, direction = next_step
-        mark_and_check_loop(tracking_map, x, y, direction)
+        mark_and_check_loop(original_tracking_map, x, y, direction)
         next_step = step(obstructions_map, x, y, direction)
-    visited_map = [[sum(directions) > 0 for directions in row] for row in tracking_map]
 
     answer_1 = 0
     answer_2 = 0
     for obstruction_x in range(w):
         for obstruction_y in range(h):
-            if not visited_map[obstruction_y][obstruction_x]:
-                continue
+            if not any(original_tracking_map[obstruction_y][obstruction_x]):
+                continue  # no path goes through this point
             answer_1 += 1
 
             obstructions_map[obstruction_y][obstruction_x] = WALL
