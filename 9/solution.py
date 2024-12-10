@@ -29,7 +29,7 @@ def find_block(disk: list[int]):
     return left + 1, right + 1
 
 
-# return pointers to empty space of size from the left, return None if not found
+# return pointers to first empty space of given size searching from the left, return None if not found
 def find_empty(disk: list[int], size: int):
     left = right = 0
     while left < len(disk):
