@@ -56,6 +56,7 @@ def answer_for_code(code: str, n_robots: int):
 
 
 def solve(filename: str):
+    print(filename)
     with open(filename, "r") as f:
         codes = f.read().splitlines()
 
